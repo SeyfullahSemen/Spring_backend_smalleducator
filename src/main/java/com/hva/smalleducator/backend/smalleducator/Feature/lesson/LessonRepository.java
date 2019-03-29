@@ -1,4 +1,4 @@
-package com.hva.smalleducator.backend.smalleducator.Feature;
+package com.hva.smalleducator.backend.smalleducator.Feature.lesson;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,4 +1,4 @@
-package com.hva.smalleducator.backend.smalleducator.Feature;
+package com.hva.smalleducator.backend.smalleducator.Feature.lesson;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,34 +14,36 @@ import java.util.List;
 @RestController
 public class LessonController {
 
-    private final LessonRepository lessonRepository;
+    private final LessonImpl lessonImpl;
 
     /**
-     * @param lessonRepository
+     * @param lessonImpl
      */
     @Autowired
-    public LessonController(LessonRepository lessonRepository) {
-        this.lessonRepository = lessonRepository;
+    public LessonController(LessonImpl lessonImpl) {
+        this.lessonImpl = lessonImpl;
     }
 
     /**
      * With this endpoint we can add a new lesson.
+     *
      * @param lesson
      */
     @PostMapping(value = "/lesson", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void createNewLesson(@RequestBody Lesson lesson) {
-        lessonRepository.save(lesson);
+    public Lesson createNewLesson(@RequestBody Lesson lesson) {
+        return lessonImpl.save(lesson);
     }
 
     /**
      * with this endoint you can get all the lessons.
-     * @return
+     *
+     * @return a list of all the lessons.
      */
     @GetMapping(value = "/lesson", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Lesson> getAllLessons() {
-        return lessonRepository.findAll();
+        return lessonImpl.findAll();
     }
 
 }
