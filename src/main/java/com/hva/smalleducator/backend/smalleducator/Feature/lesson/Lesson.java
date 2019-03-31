@@ -1,13 +1,13 @@
-package com.hva.smalleducator.backend.smalleducator.Feature.slide;
+package com.hva.smalleducator.backend.smalleducator.Feature.lesson;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
-@Table(name = "slide")
+@Table(name = "Lesson")
 @Entity
-public class Slide {
+public class Lesson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
