@@ -17,12 +17,22 @@ public class CourseImpl implements ICourseService {
     }
 
     @Override
-    public Course save( @Valid Course course) {
+    public Course save(@Valid Course course) {
         return courseRepository.save(course);
     }
 
     @Override
     public List<Course> findAll() {
         return courseRepository.findAll();
+    }
+
+    @Override
+    public void delete(Course courseName) {
+        courseRepository.delete(courseName);
+    }
+
+    @Override
+    public Course findByName(String courseName) {
+        return courseRepository.findByCoursename(courseName);
     }
 }
