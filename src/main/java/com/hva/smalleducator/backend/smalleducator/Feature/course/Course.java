@@ -1,4 +1,4 @@
-package com.hva.smalleducator.backend.smalleducator.Feature.lesson;
+package com.hva.smalleducator.backend.smalleducator.Feature.course;
 
 import lombok.Data;
 
@@ -11,16 +11,16 @@ import javax.validation.constraints.NotNull;
  * to create new schema.
  */
 @Entity
-@Table(name = "lesson")
+@Table(name = "Course")
 @Data
-public class Lesson {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    @Column(name = "lessonname", nullable = false)
+    @Column(name = "coursename", nullable = false)
     @NotBlank
     @NotNull
-    public String lessonname;
+    public String coursename;
 }

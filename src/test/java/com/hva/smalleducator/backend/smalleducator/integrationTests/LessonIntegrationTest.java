@@ -1,9 +1,9 @@
 package com.hva.smalleducator.backend.smalleducator.integrationTests;
 
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.Lesson;
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.LessonController;
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.LessonImpl;
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.LessonRepository;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.Course;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.CourseController;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.CourseImpl;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.CourseRepository;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,10 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class LessonIntegrationTest extends BaseIntegrationTest {
     @Mock
-    private LessonRepository lessonRepository;
+    private CourseRepository courseRepository;
 
     @InjectMocks
-    private LessonImpl lessonImpl;
+    private CourseImpl lessonImpl;
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,7 +32,7 @@ public class LessonIntegrationTest extends BaseIntegrationTest {
      */
     @Override
     protected Object getControllerUnderTest() {
-        return new LessonController(lessonImpl);
+        return new CourseController(lessonImpl);
     }
 
     /**
@@ -43,20 +43,20 @@ public class LessonIntegrationTest extends BaseIntegrationTest {
      */
     @Test
     public void lessonAdded_success() throws Exception {
-        Lesson lesson = new Lesson();
-        lesson.setId(1L);
-        lesson.setLessonname("Architecture and design");
+        Course course = new Course();
+        course.setId(1L);
+        course.setLessonname("Architecture and design");
 
-        Mockito.when(lessonRepository.save(Mockito.any())).thenReturn(lesson);
+        Mockito.when(courseRepository.save(Mockito.any())).thenReturn(course);
         this.mockMvc.perform(MockMvcRequestBuilders.
-                post("/lesson")
-                .content(objectToJsonString(lesson))
+                post("/course")
+                .content(objectToJsonString(course))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
                 .andDo(mvcResult -> {
                     String jsonResponse = mvcResult.getResponse().getContentAsString();
-                    JSONAssert.assertEquals(objectToJsonString(lesson), jsonResponse, false);
+                    JSONAssert.assertEquals(objectToJsonString(course), jsonResponse, false);
                 });
 
     }
