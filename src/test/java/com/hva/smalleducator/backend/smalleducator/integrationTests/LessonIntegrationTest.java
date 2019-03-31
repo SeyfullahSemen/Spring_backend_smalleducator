@@ -45,7 +45,7 @@ public class LessonIntegrationTest extends BaseIntegrationTest {
     public void lessonAdded_success() throws Exception {
         Course course = new Course();
         course.setId(1L);
-        course.setLessonname("Architecture and design");
+        course.setCoursename("Architecture and design");
 
         Mockito.when(courseRepository.save(Mockito.any())).thenReturn(course);
         this.mockMvc.perform(MockMvcRequestBuilders.

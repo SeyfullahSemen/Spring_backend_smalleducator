@@ -16,4 +16,5 @@ public class Lesson {
     @Column(name = "title", nullable = false, columnDefinition = "LONGTEXT")
     private String title;
 
+
 }
