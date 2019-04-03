@@ -9,11 +9,12 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
-@Table(name = "LessonSlides")
 @Entity
-public class LessonSlides {
+@Table(name = "LessonSlides")
+public class LessonSlides implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +29,6 @@ public class LessonSlides {
     @JoinColumn(name = "lesson_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Lesson lesson;
+    private Lesson Lesson;
 
 }

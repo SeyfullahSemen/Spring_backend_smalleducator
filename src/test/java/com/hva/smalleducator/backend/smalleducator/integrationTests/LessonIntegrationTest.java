@@ -37,7 +37,7 @@ public class LessonIntegrationTest extends BaseIntegrationTest {
 
     /**
      * This is an integration test which will test whether the
-     * teacher can save a new lesson into the database.
+     * teacher can save a new course into the database.
      *
      * @throws Exception
      */
