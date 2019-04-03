@@ -1,9 +1,9 @@
 package com.hva.smalleducator.backend.smalleducator.integrationTests;
 
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.Lesson;
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.LessonController;
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.LessonImpl;
-import com.hva.smalleducator.backend.smalleducator.Feature.lesson.LessonRepository;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.Course;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.CourseController;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.CourseImpl;
+import com.hva.smalleducator.backend.smalleducator.Feature.course.CourseRepository;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,40 +16,48 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class LessonIntegrationTest extends BaseIntegrationTest {
+
+public class CourseIntegrationTest extends BaseIntegrationTest {
     @Mock
-    private LessonRepository lessonRepository;
+    private CourseRepository courseRepository;
 
     @InjectMocks
-    private LessonImpl lessonImpl;
+    private CourseImpl courseImpl;
 
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * @return object
+     */
     @Override
     protected Object getControllerUnderTest() {
-        return new LessonController(lessonImpl);
+        return new CourseController(courseImpl);
     }
 
     /**
+     * This is an integration test which will test whether the
+     * teacher can save a new course into the database.
+     *
      * @throws Exception
      */
     @Test
-    public void addLesson_succes() throws Exception {
-        Lesson lesson = new Lesson();
-        lesson.setId(1L);
-        lesson.setTitle("Week 1");
+    public void lessonAdded_success() throws Exception {
+        Course course = new Course();
+        course.setId(1L);
+        course.setCoursename("Architecture and design");
 
-        Mockito.when(lessonRepository.save(Mockito.any())).thenReturn(lesson);
+        Mockito.when(courseRepository.save(Mockito.any())).thenReturn(course);
         this.mockMvc.perform(MockMvcRequestBuilders.
-                post("/lesson")
-                .content(objectToJsonString(lesson))
+                post("/course")
+                .content(objectToJsonString(course))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
                 .andDo(mvcResult -> {
                     String jsonResponse = mvcResult.getResponse().getContentAsString();
-                    JSONAssert.assertEquals(objectToJsonString(lesson), jsonResponse, false);
+                    JSONAssert.assertEquals(objectToJsonString(course), jsonResponse, false);
                 });
+
     }
 }
