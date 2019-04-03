@@ -3,10 +3,12 @@ package com.hva.smalleducator.backend.smalleducator.Feature.lesson;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
-@Table(name = "Lesson")
 @Entity
+@Table(name = "Lesson")
 public class Lesson {
 
     @Id
@@ -14,6 +16,8 @@ public class Lesson {
     private Long id;
 
     @Column(name = "title", nullable = false, columnDefinition = "LONGTEXT")
+    @NotBlank
+    @NotNull
     private String title;
 
 
